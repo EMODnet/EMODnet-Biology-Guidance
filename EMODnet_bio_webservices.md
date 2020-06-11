@@ -6,7 +6,7 @@ The EMODnet Biology data are available as a [Web Feature Service (WFS)](https://
 
 Essentially, the [Download Toolbox](https://www.emodnet-biology.eu/toolbox) developed by EMODnet Biology acts as an interactive builder of WFS requests . The URL to the WFS request can be copied to the clipboard at the last step of the selection in the Download Toolbox.
 
-![](\images\toolbox_screenshot.png)
+![](images/toolbox_screenshot.png)
 
 EMODnet Biology aims to follow the [FAIR principles](https://www.go-fair.org/fair-principles/). The data formats presented by EMODnet Biology enhances its interoperability by providing a link to other marine biogeographical data systems developed by VLIZ as the [World Record of Marine Species (WoRMS)](https://www.marinespecies.org/), [MarineRegions.org](https://marineregions.org/) or the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset). Please find below more information about the webservices offered by these projects.
 
