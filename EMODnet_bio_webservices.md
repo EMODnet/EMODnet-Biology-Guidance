@@ -1,4 +1,6 @@
-# Web services documentation
+# EMODnet Biology Web service documentation
+
+## EMODnet Biology Data
 
 The EMODnet Biology data are available as a [Web Feature Service (WFS)](https://docs.geoserver.org/latest/en/user/services/wfs/index.html) in accordance with the [Open Geospatial Consortium (OGC)](https://www.ogc.org/) specifications. This webservice supports requests for geographical feature data (with vector geometry and attributes). The base link for performing a WFS request to EMODnet Biology is:
 
@@ -8,31 +10,127 @@ Essentially, the [Download Toolbox](https://www.emodnet-biology.eu/toolbox) deve
 
 ![](images/toolbox_screenshot.png)
 
-EMODnet Biology follows the [FAIR principles](https://www.go-fair.org/fair-principles/). The data formats available via EMODnet Biology allow for enhanced interoperability by providing links to controlled vocabularies, like the [World Record of Marine Species (WoRMS)](https://www.marinespecies.org/), [MarineRegions.org](https://marineregions.org/) and the [British Oceanographic Data Centre](https://www.bodc.ac.uk). It also has links to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset), a system developed by the [Flanders Marine Institute (VLIZ)](https://www.vliz.be/) where information about people, organisations, publications and more is stored and managed. 
+Technical details of the WFS can be retrieved by following GetCapabilities request:
 
-Please find below more information about the webservices offered by these projects.
+https://geo.vliz.be/geoserver/Dataportal/ows?service=wfs&version=1.1.0&request=GetCapabilities
 
-### Occurrence data (species observations) as Web Feature Services (WFS)
+---
 
-#### **Data formats**: 
 
-There are [three data formats](https://www.emodnet-biology.eu/emodnet-data-format) presented by EMODnet Biology. The syntax for specifying a data format is:
+### Building a WFS query to get data:
+
+For composing your own query, you need to combine different parts:
+
+1.  the base url
+1.  the data format
+1.  filtering options (optional)
+1.  the output format
+
+#### 1. The base url
+
+The base link for performing a WFS request to EMODnet Biology is:
+```
+https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&
+```
+
+#### 2. The data format: 
+
+There are [three data formats](https://www.emodnet-biology.eu/emodnet-data-format) presented by EMODnet Biology.
+
+* Basic Occurrence Data
+* Full Occurrence Data
+* Full Occurrence Data and Parameters
+
+The syntax for specifying a data format is:
 
 ```
 typeName=Dataportal:<data_format>
 ```
+  - **Basic Occurrence Data**
+  
+    The **Basic Occurrence Data** provides you with all data required to perform temporal spatial analysis for the different taxa. It indicates which taxa was found (`scientificname` and `aphiaid`), when (`datecollected`) and where (`decimallongitude` and `decimallatitude` in WGS84 - EPGS:4326), along with a dataset identifier (`datasetid`).
+    
+    The syntax for requesting this data format is: `eurobis-obisenv_basic`
 
-The **Basic Occurrence Data** provides you with all data required to perform temporal spatial analysis for the different taxa. It indicates which taxa was found (`scientificname` and `aphiaid`), when (`datecollected`) and where (`decimallongitude` and `decimallatitude` in WGS84 - EPGS:4326), along with a dataset identifier (`datasetid`). The syntax for requesting this data format is: `eurobis-obisenv_basic`
+    For example, the following request will return the first 50 basic occurrence records: 
 
-The **Full Occurrence Data** provides additional information which may help interpret the basic data. This format offers all the data from the Basic Occurrences plus The syntax for requesting this data format is: `eurobis-obisenv_full`
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv_basic**&**maxFeatures=50**&outputformat=csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=csv)
 
-The **Full Occurrence Data and Parameters** provides you with all measurement or facts associated to the occurrence or the sample. The syntax for requesting this data format is: `eurobis-obisenv`
+  - **Full Occurrence Data**
+  
+    The **Full Occurrence Data** provides additional information which may help interpret the basic data. This format offers all the data from the Basic Occurrences plus additiontal information which may help interpret the basic data such as information on the institute collecting the data, the methodology, the exact time and location (and uncertainty),...
+    
+    The syntax for requesting this data format is: `eurobis-obisenv_full`
+    
+    For example, the following request will return the first 50 full occurrence records: 
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv_full**&**maxFeatures=50**&outputformat=csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&maxFeatures=50&outputformat=csv)
+
+  - **Full Occurrence Data and Parameters**
+
+    The **Full Occurrence Data and Parameters** provides you with all measurement or facts associated to the occurrence or the sample.
+    
+    The syntax for requesting this data format is: `eurobis-obisenv`
+    
+    For example, the following request will return the first 50 full occurrence data and parameter records: 
+
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv**&**maxFeatures=50**&outputformat=csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv&maxFeatures=50&outputformat=csv)
 
 You can find more information about the terms returned by each download type in the [documentation](https://www.emodnet-biology.eu/emodnet-data-format). 
 
 
+#### 3. Filtering options: 
 
-#### **Output formats**: 
+In this part you can filter the result by several parameters.
+We highlight three options:
+
+* Taxonomy
+* Geography 
+* Dataset
+
+These filter options are linked to other services that you can find at the end of this page.
+
+  - **Taxonomy: World Record of Marine Species (WoRMS)**
+
+    Concerning taxonomy, EMODnet Biology data are connected to the services provided by the [World Record of Marine Species (WoRMS)](https://www.marinespecies.org/) using the [AphiaID](https://www.marinespecies.org/about.php#what_is_aphia). This is provided in the `aphiaid` and `aphiaidaccepted` columns. 
+
+    To retrieve a Shapefile with the full occurrence data of the seabird Herring gull (*Larus argentatus*) using its AphiaID [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138), you can run the following request (this might take a while to complete):
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:**aphiaidaccepted=137138**&outputformat=csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:aphiaidaccepted=137138&outputformat=csv)
+
+
+  - **Geography: Marine Regions**
+
+    EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.emodnet-biology.eu/toolbox) and copying the WFS request generated. 
+
+    For example, the following request returns all occurrences in the Belgian Exclusive Economic Zone (MRGID [3293](https://marineregions.org/gazetteer.php?p=details&id=3293)): (this might take a while)
+
+    [https://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&resultType=results&viewParams=where:((up.geoobjectsids+&&+ARRAY[**3293**]));context:0100;&outputFormat=csv](https://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Aeurobis-obisenv_basic&resultType=results&viewParams=where%3A%28%28up.geoobjectsids+%26%26+ARRAY%5B3293%5D%29%29%3Bcontext%3A0100%3B&outputFormat=csv)
+
+    Currenlty you can subset on EEZ, IHO Sea Area, Marine Ecoregion of the World (MEOW), Marine Region, Territorial Sea.
+
+
+  - **Dataset (Integrated Marine Information System - IMIS)**
+
+    Filtering on datasets is possible thanks to the connection to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset) described via this [link](https://www.emodnet-biology.eu/data-catalog?page=webservices).
+
+    This request will return the first 50 basic occurrences from the dataset *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) as a csv file:
+
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&&viewParams=where:**datasetid=4659**&maxFeatures=50&outputformat=*csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&&viewParams=where:datasetid=4659&maxFeatures=50&outputformat=csv)
+
+
+  - **Combining filter parameters**
+  
+    Here are some examples of combining filters:
+    
+    Querying for two or more conditions is also possible as seen below when requesting the occurrences of the seabird Herring gull (*Larus argentatus* [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138)) in the dataset titled *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) as JSON:
+
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:**aphiaidaccepted=137138 AND datasetid=4659**&outputformat=application/json](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:aphiaidaccepted=137138%20AND%20datasetid=4659&outputformat=application/json)
+    
+    The WFS request allows the use of `OR` statements. You can retrieve a CSV file with the full occurrence data and parameters of both the White furrow (*Alba alba* [141433](http://www.marinespecies.org/aphia.php?p=taxdetails&id=141433)) and the Common razor shells (*Ensis ensis* [140733](http://www.marinespecies.org/aphia.php?p=taxdetails&id=140733)):
+  
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv**&viewParams=where:**aphiaidaccepted=141433 OR aphiaidaccepted=140733**&outputformat=csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv&viewParams=where:aphiaidaccepted=141433 OR aphiaidaccepted=140733&outputformat=csv)
+
+
+#### 4. The output format: 
 
 EMODnet Biology data are available in a number of [output formats](https://docs.geoserver.org/latest/en/user/services/wfs/outputformats.html), which are indicated at the end of the WFS request as:
 
@@ -40,47 +138,30 @@ EMODnet Biology data are available in a number of [output formats](https://docs.
   outputFormat=<output_format>
 ```
 
-The following GetCapabilities request returns the complete list of output formats available for each type of WFS request (For example, see the GetFeatures request)
+  - **csv**
 
-https://geo.vliz.be/geoserver/Dataportal/ows?service=wfs&version=1.1.0&request=GetCapabilities
-
-
-
-#### **Building a query:** 
-
-The different parameters in which you can perform a query can be consulted using a `DescribeFeatureType` WFS request. In the case of the Basic Occurrence Data this is:
-
-[https://geo.vliz.be/geoserver/Dataportal/ows?service=wfs&version=2.0.0&request=**DescribeFeatureType**&typeName=Dataportal:**eurobis-obisenv_basic**&outputFormat=application/json](http://geo.vliz.be/geoserver/Dataportal/ows?service=wfs&version=2.0.0&request=DescribeFeatureType&typeName=Dataportal:eurobis-obisenv_basic&outputFormat=application/json)
-
-Please see the examples below for more information on how to query EMODnet Biology data using WFS.
-
-  - **Basic Occurrence Data**
-
-    This request will return the first 50 basic occurrences from the dataset *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) as a csv file:
-
-    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv_basic**&&viewParams=where:**datasetid=4659**&**maxFeatures=50**&outputformat=**csv**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&&viewParams=where:datasetid=4659&maxFeatures=50&outputformat=csv)
-
-  - **Full Occurrence Data**
-
-    To retrieve a Shapefile with the full occurrence data of the seabird Herring gull (*Larus argentatus*) using its AphiaID [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138), you can run the following request (this might take a while to complete):
-
-    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv_full**&&viewParams=where:**aphiaidaccepted=137138**&outputformat=**SHAPE-ZIP**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:aphiaidaccepted=137138&outputformat=SHAPE-ZIP)
-
-    Querying for two or more conditions is also possible as seen below when requesting the occurrences of the seabird Herring gull (*Larus argentatus* [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138)) in the dataset titled *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) as JSON:
-
-    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:**aphiaidaccepted=137138 AND datasetid=4659**&outputformat=**application/json**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:aphiaidaccepted=137138%20AND%20datasetid=4659&outputformat=application/json)
-
-  - **Full Occurrence Data and Parameters**
-
-    The WFS request allows the use of `OR` statements. You can retrieve a CSV file with the full occurrence data and parameters of both the White furrow (*Alba alba* [141433](http://www.marinespecies.org/aphia.php?p=taxdetails&id=141433)) and the Common razor shells (*Ensis ensis* [140733](http://www.marinespecies.org/aphia.php?p=taxdetails&id=140733)):
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=**csv**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=csv)
+    
+  - **json**
   
-    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv**&viewParams=where:**aphiaidaccepted=141433 OR aphiaidaccepted=140733**&outputformat=**csv**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv&viewParams=where:aphiaidaccepted=141433 OR aphiaidaccepted=140733&outputformat=csv)
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=**application/json**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=application/json)
   
-    The request above will return one row per parameter available in EMODnet Biology, instead of one row per occurrence as the basic and full occurrence data do. See the [documentation](https://www.emodnet-biology.eu/emodnet-data-format) on data formats for more information.
+ - **shapefile**
+  
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=**SHAPE-ZIP**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=SHAPE-ZIP)
+
+ - **kml**
+  
+    [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=**application/vnd.google-earth.kml+xml**](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&maxFeatures=50&outputformat=application/vnd.google-earth.kml+xml)
+
+  
+    For other output formats, see the GetCapabilities request which returns the complete list of output formats available for each type of WFS request: https://geo.vliz.be/geoserver/Dataportal/ows?service=wfs&version=1.1.0&request=GetCapabilities
 
 
+---
 
-#### Other services
+## EMODnet Biology summary and data product services
+
 
 In addition to the three data formats, EMODnet Biology also makes available through its webservices the possibility of returning the total **occurrences count** for a certain query, its occurrence data as **gridded abundances** in a GIS Layers, and the [**data products**](https://www.emodnet-biology.eu/toolbox/en/gallery/) developed by the EMODnet Biology community:
 
@@ -88,7 +169,7 @@ In addition to the three data formats, EMODnet Biology also makes available thro
   
     [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv_count**&&viewParams=where:**datasetid=4659**&outputformat=application/json](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_count&&viewParams=where:datasetid=4659&outputformat=application/json)
 
-- **Retrieve data of the gridded abundance:** EMODnet Biology also offers occurrences as geospatial products. There are four grid size levels available, plus the possibility of retrieving each point directly. To query any of these five options, the correct table must be specified in the request:
+- **Retrieve a geospatial grid, summarising the number of eurobis occurrences:** EMODnet Biology also offers occurrences summarised as the number of occurrences in a geospatial grid. There are four grid size levels available, plus the possibility of retrieving each point directly. To query any of these five options, the correct table must be specified in the request:
 
   - One degree: `&typeName=Dataportal:eurobis_grid_1d-obisenv`
 
@@ -110,8 +191,13 @@ In addition to the three data formats, EMODnet Biology also makes available thro
     - [OOPS Copepod gridded abundances 1-year bin](http://geo.vliz.be/geoserver/Emodnetbio/wms?service=WMS&version=1.1.0&request=GetMap&layers=Emodnetbio:OOPS_products&styles=&bbox=-4.95,48.05,12.25,60.75&width=512&height=378&srs=EPSG:4326&format=application/openlayers&viewparams=scientificName:Large copepods;season:1;AphiaID:1080;startYearCollection:1958;endYearCollection:1958)
 
 
+---
 
-### Interoperability with other marine biogeographical data systems
+## Other marine biogeographical data systems
+
+EMODnet Biology follows the [FAIR principles](https://www.go-fair.org/fair-principles/). The data formats available via EMODnet Biology allow for enhanced interoperability by providing links to controlled vocabularies, like the [World Record of Marine Species (WoRMS)](https://www.marinespecies.org/), [MarineRegions.org](https://marineregions.org/) and the [British Oceanographic Data Centre](https://www.bodc.ac.uk). It also has links to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset), a system developed by the [Flanders Marine Institute (VLIZ)](https://www.vliz.be/) where information about people, organisations, publications and more is stored and managed. 
+
+Please find below more information about the webservices offered by these projects.
 
 * **Taxonomy: World Record of Marine Species (WoRMS)**
 
@@ -147,9 +233,11 @@ In addition to the three data formats, EMODnet Biology also makes available thro
 
   [https://www.emodnet-biology.eu/data-catalog?module=dataset&**dasid=4659**&**show=json**](https://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659&show=json)
 
-### **R client for EMODnet Biology webservices:**
+---
 
-EMODnet Biology data are accessible via an R package, which provides webservice wrapper. You can find more information on the [GitHub repository](https://github.com/lifewatch/eurobis/):
+## R client for EMODnet Biology webservices:
+
+EMODnet Biology data are accessible via an R package `eurobis`, which provides webservice wrapper. You can find more information on the [GitHub repository](https://github.com/lifewatch/eurobis/):
 
 Some data applications using EMODnet Biology data has been written in R using the shiny framework: These are available at:
 
