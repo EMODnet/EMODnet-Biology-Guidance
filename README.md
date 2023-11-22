@@ -6,7 +6,7 @@ The EMODnet Biology data are available as a [Web Feature Service (WFS)](https://
 
 [https://geo.vliz.be/geoserver/Dataportal/ows?](https://geo.vliz.be/geoserver/Dataportal/ows?)
 
-Essentially, the [Download Toolbox](https://www.emodnet-biology.eu/toolbox) developed by EMODnet Biology acts as an interactive builder for WFS requests . The URL to the WFS request can be copied to the clipboard at the last step of the selection in the Download Toolbox.
+Essentially, the [Download Toolbox](https://www.emodnet-biology.eu/toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) developed by EMODnet Biology acts as an interactive builder for WFS requests . The URL to the WFS request can be copied to the clipboard at the last step of the selection in the Download Toolbox.
 
 ![](images/toolbox_screenshot.png)
 
@@ -35,7 +35,7 @@ https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=G
 
 #### 2. The data format: 
 
-There are [three data formats](https://www.emodnet-biology.eu/emodnet-data-format) presented by EMODnet Biology.
+There are [three data formats](https://emodnet.ec.europa.eu/en/biology#biology-data-and-products-format) presented by EMODnet Biology.
 
 * Basic Occurrence Data
 * Full Occurrence Data
@@ -75,7 +75,7 @@ typeName=Dataportal:<data_format>
 
     [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv**&**maxFeatures=50**&outputformat=csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv&maxFeatures=50&outputformat=csv)
 
-You can find more information about the terms returned by each download type in the [documentation](https://www.emodnet-biology.eu/emodnet-data-format). 
+You can find more information about the terms returned by each download type in the [documentation](https://emodnet.ec.europa.eu/en/biology#biology-data-and-products-format). 
 
 
 #### 3. Filtering options: 
@@ -99,7 +99,7 @@ These filter options are linked to other services that you can find at the end o
 
   - **Geography: Marine Regions**
 
-    EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.emodnet-biology.eu/toolbox) and copying the WFS request generated. 
+    EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.emodnet-biology.eu/toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) and copying the WFS request generated. 
 
     For example, the following request returns all occurrences in the Belgian Exclusive Economic Zone (MRGID [3293](https://marineregions.org/gazetteer.php?p=details&id=3293)): (this might take a while)
 
@@ -110,9 +110,9 @@ These filter options are linked to other services that you can find at the end o
 
   - **Dataset (Integrated Marine Information System - IMIS)**
 
-    Filtering on datasets is possible thanks to the connection to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset) described via this [link](https://www.emodnet-biology.eu/data-catalog?page=webservices).
+    Filtering on datasets is possible thanks to the connection to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset) described via this [link](https://emodnet.ec.europa.eu/en/emodnet-web-service-documentation).
 
-    This request will return the first 50 basic occurrences from the dataset *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) as a csv file:
+    This request will return the first 50 basic occurrences from the dataset *Monitoring of birds in the Voordelta* ([datasetid=4569](https://www.eurobis.org/imis?module=dataset&dasid=4659)) as a csv file:
 
     [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&&viewParams=where:**datasetid=4659**&maxFeatures=50&outputformat=*csv](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_basic&&viewParams=where:datasetid=4659&maxFeatures=50&outputformat=csv)
 
@@ -121,7 +121,7 @@ These filter options are linked to other services that you can find at the end o
   
     Here are some examples of combining filters:
     
-    Querying for two or more conditions is also possible as seen below when requesting the occurrences of the seabird Herring gull (*Larus argentatus* [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138)) in the dataset titled *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) as JSON:
+    Querying for two or more conditions is also possible as seen below when requesting the occurrences of the seabird Herring gull (*Larus argentatus* [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138)) in the dataset titled *Monitoring of birds in the Voordelta* ([datasetid=4569](https://www.eurobis.org/imis?module=dataset&dasid=4659)) as JSON:
 
     [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:**aphiaidaccepted=137138 AND datasetid=4659**&outputformat=application/json](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_full&&viewParams=where:aphiaidaccepted=137138%20AND%20datasetid=4659&outputformat=application/json)
     
@@ -163,9 +163,9 @@ EMODnet Biology data are available in a number of [output formats](https://docs.
 ## EMODnet Biology summary and data product services
 
 
-In addition to the three data formats, EMODnet Biology also makes available through its webservices the possibility of returning the total **occurrences count** for a certain query, its occurrence data as **gridded abundances** in a GIS Layers, and the [**data products**](https://www.emodnet-biology.eu/toolbox/en/gallery/) developed by the EMODnet Biology community:
+In addition to the three data formats, EMODnet Biology also makes available through its webservices the possibility of returning the total **occurrences count** for a certain query, its occurrence data as **gridded abundances** in a GIS Layers, and the [**data products**](https://emodnet.ec.europa.eu/geonetwork/srv/eng/catalog.search#/search?facet.q=sourceCatalog%2F17310db5-a423-4a81-b4d6-946d5a53696e&resultType=details&sortBy=sortDate&fast=index&_content_type=json&from=1&to=20) developed by the EMODnet Biology community:
 
-  - **Retrieve the count of occurrences**: You can retrieve the total number of records available in EMODnet Biology for a certain query using the sentence `Dataportal:eurobis-obisenv_count`. The example below will return the number of occurrences in the dataset *Monitoring of birds in the Voordelta* ([datasetid=4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)):
+  - **Retrieve the count of occurrences**: You can retrieve the total number of records available in EMODnet Biology for a certain query using the sentence `Dataportal:eurobis-obisenv_count`. The example below will return the number of occurrences in the dataset *Monitoring of birds in the Voordelta* ([datasetid=4569](https://www.eurobis.org/imis?module=dataset&dasid=4659)):
   
     [https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:**eurobis-obisenv_count**&&viewParams=where:**datasetid=4659**&outputformat=application/json](https://geo.vliz.be/geoserver/Dataportal/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Dataportal:eurobis-obisenv_count&&viewParams=where:datasetid=4659&outputformat=application/json)
 
@@ -185,7 +185,7 @@ In addition to the three data formats, EMODnet Biology also makes available thro
 
   [https://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.3.0&request=GetFeature&typeName=Dataportal:**eurobis_grid_30m-obisenv**&viewParams=**aphiaid:137138**&outputFormat=**application/vnd.google-earth.kml+xml**](https://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.3.0&request=GetFeature&typeName=Dataportal:eurobis_grid_30m-obisenv&viewParams=aphiaid:137138&outputFormat=application/vnd.google-earth.kml+xml)
 
-- **Retrieving data products**: EMODnet Biology develops data products that are accessible through WFS services. For example, the following requests return the [OOPS Copepod gridded abundances](https://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=5438) in 1 and 10 years bin respectively:
+- **Retrieving data products**: EMODnet Biology develops data products that are accessible through WFS services. For example, the following requests return the [OOPS Copepod gridded abundances](https://www.eurobis.org/imis?module=dataset&dasid=5438) in 1 and 10 years bin respectively:
 
     - [OOPS Copepod gridded abundances 10-year bin](http://geo.vliz.be/geoserver/Emodnetbio/wms?service=WMS&version=1.1.0&request=GetMap&layers=Emodnetbio:OOPS_products&styles=&bbox=-4.95,48.05,12.25,60.75&width=512&height=378&srs=EPSG:4326&format=application/openlayers&viewparams=scientificName:Large copepods;season:1;AphiaID:1080;startYearCollection:1958;endYearCollection:1967)
     - [OOPS Copepod gridded abundances 1-year bin](http://geo.vliz.be/geoserver/Emodnetbio/wms?service=WMS&version=1.1.0&request=GetMap&layers=Emodnetbio:OOPS_products&styles=&bbox=-4.95,48.05,12.25,60.75&width=512&height=378&srs=EPSG:4326&format=application/openlayers&viewparams=scientificName:Large copepods;season:1;AphiaID:1080;startYearCollection:1958;endYearCollection:1958)
@@ -209,7 +209,7 @@ Please find below more information about the webservices offered by these projec
 
 * **Geographic: Marine Regions**
 
-  EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.emodnet-biology.eu/toolbox) and copying the WFS request generated. 
+  EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) and copying the WFS request generated. 
 
   For example, the following request returns all Herring gull (*Larus argentatus* [137138](http://www.marinespecies.org/aphia.php?p=taxdetails&id=137138)) seabird occurrences in the Belgian Exclusive Economic Zone (MRGID [3293](https://marineregions.org/gazetteer.php?p=details&id=3293)):
 
@@ -227,11 +227,11 @@ Please find below more information about the webservices offered by these projec
 
 * **Metadata: Integrated Marine Information System (IMIS)**
 
-  Retrieving metadata about a dataset is possible thanks to the connection to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset) described via this [link](https://www.emodnet-biology.eu/data-catalog?page=webservices).
+  Retrieving metadata about a dataset is possible thanks to the connection to the [Integrated Marine Information System (IMIS)](https://www.vliz.be/en/imis?module=dataset) described via this [link](https://emodnet.ec.europa.eu/en/emodnet-web-service-documentation).
 
-  The example below returns metadata about the dataset *Monitoring of birds in the Voordelta* ([4569](http://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659)) in the JSON file format:
+  The example below returns metadata about the dataset *Monitoring of birds in the Voordelta* ([4569](https://www.eurobis.org/imis?module=dataset&dasid=4659)) in the JSON file format:
 
-  [https://www.emodnet-biology.eu/data-catalog?module=dataset&**dasid=4659**&**show=json**](https://www.emodnet-biology.eu/data-catalog?module=dataset&dasid=4659&show=json)
+  [https://www.emodnet-biology.eu/data-catalog?module=dataset&**dasid=4659**&**show=json**](https://www.eurobis.org/imis?module=dataset&dasid==4659&show=json)
 
 ---
 
