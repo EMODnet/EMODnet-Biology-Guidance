@@ -6,7 +6,7 @@ The EMODnet Biology data are available as a [Web Feature Service (WFS)](https://
 
 [https://geo.vliz.be/geoserver/Dataportal/ows?](https://geo.vliz.be/geoserver/Dataportal/ows?)
 
-Essentially, the [Download Toolbox](https://www.emodnet-biology.eu/toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) developed by EMODnet Biology acts as an interactive builder for WFS requests . The URL to the WFS request can be copied to the clipboard at the last step of the selection in the Download Toolbox.
+Essentially, the [Download Toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) developed by EMODnet Biology acts as an interactive builder for WFS requests . The URL to the WFS request can be copied to the clipboard at the last step of the selection in the Download Toolbox.
 
 ![](images/toolbox_screenshot.png)
 
@@ -99,7 +99,7 @@ These filter options are linked to other services that you can find at the end o
 
   - **Geography: Marine Regions**
 
-    EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.emodnet-biology.eu/toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) and copying the WFS request generated. 
+    EMODnet Biology allows to query information to standardized areas by using the [MRGID](https://marineregions.org/mrgid.php) provided by [MarineRegions.org](https://marineregions.org/). This is a unique and persistent identifier for geographic objects. You can select the area of interest using the [Download Toolbox](https://www.eurobis.org/toolbox/en/download/occurrence/explore) and copying the WFS request generated. 
 
     For example, the following request returns all occurrences in the Belgian Exclusive Economic Zone (MRGID [3293](https://marineregions.org/gazetteer.php?p=details&id=3293)): (this might take a while)
 
@@ -231,7 +231,7 @@ Please find below more information about the webservices offered by these projec
 
   The example below returns metadata about the dataset *Monitoring of birds in the Voordelta* ([4569](https://www.eurobis.org/imis?module=dataset&dasid=4659)) in the JSON file format:
 
-  [https://www.emodnet-biology.eu/data-catalog?module=dataset&**dasid=4659**&**show=json**](https://www.eurobis.org/imis?module=dataset&dasid==4659&show=json)
+  [https://www.eurobis.org/imis?module=dataset&**dasid=4659**&**show=json**](https://www.eurobis.org/imis?module=dataset&dasid==4659&show=json)
 
 ---
 
