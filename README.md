@@ -235,9 +235,14 @@ Please find below more information about the webservices offered by these projec
 
 ---
 
-## R client for EMODnet Biology webservices:
+## R clients for EMODnet Biology web services:
 
-EMODnet Biology data are accessible via an R package `eurobis`, which provides webservice wrapper. You can find more information on the [GitHub repository](https://github.com/lifewatch/eurobis/):
+EMODnet Biology data are accessible in R through a series of R packages:
+
+- Occurrence data can be retrieved via the [eurobis R package](https://lifewatch.github.io/eurobis/) 
+- Vector data are available via the [emodnet.wfs R package](https://emodnet.github.io/emodnet.wfs/) using the `biology' service.
+- Raster data are available via the [EMODnetWCS R package](https://emodnet.github.io/EMODnetWCS/) using the `biology` service.
+- Gridded datasets such as several EMODnet Biology data products are available at the [EMODnet ERDDAP server](https://erddap.emodnet.eu/erddap/), accesible in R with the [rerddap R package](https://docs.ropensci.org/rerddap/)
 
 Some data applications using EMODnet Biology data has been written in R using the shiny framework: These are available at:
 
